@@ -125,7 +125,7 @@ These API docs allow you to create a client SDK in another language, Go is shown
    "email": "<user-email>",
    "email_verified": true,
    "phone_verified": false,
-   "sub": "d677717a-0b96-4071-b637-c589fbb75d4e"
+   "sub": "<user-id>"
   },
   "identities": [
     {
@@ -1294,12 +1294,15 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 
 ## WebSocket (live messages) endpoint
 
-**Note:** This isn't fully documented as i haven't documented a response when a new post/reel is detected, mark in in the SDK as experimental and offer a build flag (put websocket implemenation to a seperate file) to disable it
+**Note:** This isn't fully documented as i haven't documented a response when a new post/reel is detected, any SDK's that add this feature should mark it as experimental and offer a build flag (put websocket implemenation to a seperate file) to disable it
+
 **URL:** wss://sb.flaroapp.pl/realtime/v1/websocket?apikey=<insert-obtained-api-key-from-app>
 &vsn=1.0.0
+
 **HTTP header parameters:** 
 - `apikey`: `<insert-obtained-api-key-from-app>
 `
+
 **URL prefix parameters:** 
 - `apikey`: `<insert-obtained-api-key-from-app>
 `
@@ -1401,7 +1404,7 @@ Response to heartbeat if token is expired:
 Response if something went wrong (example error message)
 ```json
 {
-   "ref":null,
+   "ref":null,  // number is incremeted by one per request or sometimes it can be null if your implemenation is buggy
    "event":"system",
    "payload":{
       "message":"{:error, \"Unable to subscribe to changes with given parameters. Please check Realtime is enabled for the given connect parameters: [event: *, filter: creator_id=eq.<user-id>, schema: public, table: posts]\"}",
@@ -1416,7 +1419,7 @@ Response if something went wrong (example error message)
 Response to presence state (?)
 ```json
 {
-   "ref":null,
+   "ref":null, // number is incremeted by one per request or sometimes it can be null if your implemenation is buggy
    "event":"presence_state",
    "payload":{},
    "topic":"realtime:public:posts:135"
