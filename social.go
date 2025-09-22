@@ -1040,7 +1040,8 @@ func (c *Client) UploadVideo(accessToken string, videoData []byte, cacheControl 
 	// Set headers
 	req.Header.Set("Content-Type", writer.FormDataContentType())
 	req.Header.Set("apikey", c.apiKey)
-	req.Header.Set("x-client-info", "flaro-go-sdk/1.0.0")
+	req.Header.Set("user-agent", "Dart/3.9 (dart:io)") // previously was flaro-go-sdk/1.0.0
+	req.Header.Set("x-client-info", "supabase-flutter/2.10.1")
 	req.Header.Set("authorization", "Bearer "+accessToken)
 
 	// Make request
