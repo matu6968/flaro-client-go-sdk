@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net/url"
 )
 
 // SignUp creates a new user account
@@ -169,4 +170,35 @@ func (c *Client) ChangePassword(accessToken, newPassword string) (*ChangePasswor
 	}
 
 	return &changeResp, nil
+}
+
+// SignOff logs out the current user. scope can be "local" (this device) or other scopes if supported.
+// API expects a POST to /auth/v1/logout?scope=<scope> with Authorization and apikey headers. Returns 204.
+func (c *Client) SignOff(accessToken, scope string) error {
+	if scope == "" {
+		scope = "local"
+	}
+	v := url.Values{}
+	v.Set("scope", scope)
+	endpoint := "/auth/v1/logout?" + v.Encode()
+
+	resp, err := c.makeAuthenticatedRequest("POST", endpoint, map[string]string{}, accessToken)
+	if err != nil {
+		return fmt.Errorf("failed to sign off: %w", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	if resp.StatusCode != 204 {
+		var apiErr APIError
+		if err := json.Unmarshal(body, &apiErr); err != nil {
+			return fmt.Errorf("sign off failed with status %d: %s", resp.StatusCode, string(body))
+		}
+		return fmt.Errorf("sign off failed: %s", apiErr.Message)
+	}
+	return nil
 }

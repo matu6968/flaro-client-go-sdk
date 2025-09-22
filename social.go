@@ -957,6 +957,48 @@ func (c *Client) ContactSupport(accessToken, userID, subject, content string) er
 	return nil
 }
 
+// CreateUserProfile creates a profile row for a newly created account
+func (c *Client) CreateUserProfile(accessToken, userID, username string) error {
+	now := time.Now().Format("2006-01-02T15:04:05.000000")
+	req := CreateUserProfileRequest{
+		UserID:            userID,
+		Username:          username,
+		DisplayName:       username,
+		Bio:               "",
+		ProfilePicture:    "https://i.postimg.cc/660K5Hrr/pfp.png",
+		Website:           nil,
+		IsPrivate:         false,
+		CreatedAt:         now,
+		UsernameUpdatedAt: nil,
+		IsVerified:        false,
+		LastSeen:          now,
+		Ranks:             nil,
+		PremiumExpires:    nil,
+	}
+
+	endpoint := "/rest/v1/users"
+	resp, err := c.makeAuthenticatedRequest("POST", endpoint, req, accessToken)
+	if err != nil {
+		return fmt.Errorf("failed to create user profile: %w", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	if resp.StatusCode != 201 {
+		var apiErr APIError
+		if err := json.Unmarshal(body, &apiErr); err != nil {
+			return fmt.Errorf("create user profile failed with status %d: %s", resp.StatusCode, string(body))
+		}
+		return fmt.Errorf("create user profile failed: %s", apiErr.Message)
+	}
+
+	return nil
+}
+
 // UploadVideo uploads a video for use in reels
 func (c *Client) UploadVideo(accessToken string, videoData []byte, cacheControl int) (*VideoUploadResponse, error) {
 	// Generate timestamp for filename

@@ -57,6 +57,18 @@ func main() {
 		fmt.Printf("Verified: %t\n", currentUser.IsVerified)
 	}
 
+	// Prerequisite for newly created accounts: create profile row
+	// Uncomment and set a username the first time after signing up
+	// {
+	//     fmt.Println("\n=== Create User Profile (one-time after signup) ===")
+	//     username := "your_username_here"
+	//     if err := client.CreateUserProfile(authResp.AccessToken, authResp.User.ID, username); err != nil {
+	//         log.Printf("Create user profile failed: %v", err)
+	//     } else {
+	//         fmt.Println("Successfully created user profile!")
+	//     }
+	// }
+
 	// Example: Get posts
 	fmt.Println("\n=== Get Posts Example ===")
 	posts, err := client.GetPosts(authResp.AccessToken, &flaro.PostsQueryParams{
@@ -345,6 +357,14 @@ func main() {
 		//     log.Printf("Change password failed: %v", err)
 		// } else {
 		//     fmt.Printf("Successfully changed password! User ID: %s\n", changeResp.ID)
+		// }
+
+		// Example: Sign off (commented out to avoid logging out during demo)
+		// fmt.Println("\n=== Sign Off Example ===")
+		// if err := client.SignOff(authResp.AccessToken, "local"); err != nil {
+		//     log.Printf("Sign off failed: %v", err)
+		// } else {
+		//     fmt.Println("Successfully signed off (local)")
 		// }
 
 		// Example: Upload video (commented out - requires actual video file)

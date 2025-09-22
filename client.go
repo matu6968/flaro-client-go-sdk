@@ -102,9 +102,11 @@ func (c *Client) makeAuthenticatedRequest(method, endpoint string, body interfac
 	}
 
 	// Set headers
+	// Due to weird anti spam measures, i have to fool the user agent to ones in the real Flaro app to allow posting to work
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("apikey", c.apiKey)
-	req.Header.Set("x-client-info", "flaro-go-sdk/1.0.0")
+	req.Header.Set("user-agent", "Dart/3.9 (dart:io)") // previously was flaro-go-sdk/1.0.0
+	req.Header.Set("x-client-info", "supabase-flutter/2.10.1")
 
 	// Add authorization header if access token is provided
 	if accessToken != "" {

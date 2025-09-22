@@ -20,4 +20,5 @@
 5. Copy the `apikey` header field from the request.
 
 **Timeline:**
-- 2025-09-22: Notified developer about hard coded API keys in their beta testing program.
+- 2025-09-22 10:47: Notified developer about hard coded API keys in their beta testing program.
+- 2025-09-22 13:55: Developer introduced anti abuse protection to the posting API's in open beta, likely breaks posting within this Go SDK.

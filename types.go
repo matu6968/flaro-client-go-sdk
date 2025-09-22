@@ -377,3 +377,20 @@ type APIError struct {
 func (e *APIError) Error() string {
 	return e.Message
 }
+
+// CreateUserProfileRequest represents the request body for creating a user profile
+type CreateUserProfileRequest struct {
+	UserID            string  `json:"user_id"`
+	Username          string  `json:"username"`
+	DisplayName       string  `json:"display_name"`
+	Bio               string  `json:"bio"`
+	ProfilePicture    string  `json:"profile_picture"`
+	Website           *string `json:"website"`
+	IsPrivate         bool    `json:"is_private"`
+	CreatedAt         string  `json:"created_at"`
+	UsernameUpdatedAt *string `json:"username_updated_at"`
+	IsVerified        bool    `json:"is_verified"`
+	LastSeen          string  `json:"last_seen"`
+	Ranks             *string `json:"ranks"`
+	PremiumExpires    *string `json:"premium_expires"`
+}

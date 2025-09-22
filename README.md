@@ -148,6 +148,10 @@ if err != nil {
 }
 
 fmt.Printf("Access Token: %s\n", authResp.AccessToken)
+// One-time prerequisite for newly created accounts:
+// if err := client.CreateUserProfile(authResp.AccessToken, authResp.User.ID, "your_username_here"); err != nil {
+//     log.Printf("Create user profile failed: %v", err)
+// }
 ```
 
 #### Get Posts
@@ -361,6 +365,9 @@ Uploads an image for use in posts.
 #### `CreatePost(accessToken, userID, content string, mediaURLs []string) error`
 Creates a new post.
 
+#### `CreateUserProfile(accessToken, userID, username string) error`
+Creates the user's profile row after signup. Call once for new accounts.
+
 #### `RefreshToken(refreshToken string) (*AuthResponse, error)`
 Refreshes an access token using a refresh token.
 
@@ -396,6 +403,9 @@ Contacts support with a message.
 
 #### `ChangePassword(accessToken, newPassword string) (*ChangePasswordResponse, error)`
 Changes a user's password.
+
+#### `SignOff(accessToken, scope string) error`
+Logs out the current user. Scope can be "local" (this device). Returns 204.
 
 #### `UploadVideo(accessToken string, videoData []byte, cacheControl int) (*VideoUploadResponse, error)`
 Uploads a video for use in reels.
