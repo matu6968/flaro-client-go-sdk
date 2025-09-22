@@ -5,9 +5,11 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## Sign up endpoint
 **URL:** https://sb.flaroapp.pl/auth/v1/signup
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` (optional) : `Bearer   
-<insert-obtained-api-key-from-app>`
+<insert-obtained-api-key-from-app>
+`
 
 **Body**:
 ```json
@@ -80,9 +82,11 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## Sign in endpoint
 **URL:** https://sb.flaroapp.pl/auth/v1/token?grant_type=password
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` (optional) : `Bearer   
-<insert-obtained-api-key-from-app>`
+<insert-obtained-api-key-from-app>
+`
 
 **Body**:
 ```json
@@ -152,7 +156,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## View posts endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/posts?select=%2A&order=created_at.desc.nullslast&offset=0&limit=20
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -270,7 +275,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## View following endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/follows?select=following_id%2Cusers%21follows_following_id_fkey%28%2A%29&follower_id=eq.d677717a-0b96-4071-b637-c589fbb75d4e
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -305,7 +311,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## View user endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/users?select=%2A&user_id=eq.d677717a-0b96-4071-b637-c589fbb75d4e
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -334,7 +341,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## View posts (from specified user) endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/posts?select=%2A&creator_id=eq.2e2bfc78-cba4-433e-ab0f-a12e7cdcf16c
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -459,7 +467,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 **URL:** https://sb.flaroapp.pl/rest/v1/posts?id=eq.ef8eed9e-70ff-4623-a712-7ff636822033
 **Request type:** PATCH
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -482,7 +491,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## View comments on a user post endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/comments?select=%2A&post_id=eq.33404c58-45ef-4657-9c27-707b926cad41&order=created_at.asc.nullslast
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -542,7 +552,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## Get comment count (also known as just ID's) on a user post endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/comments?select=id&post_id=eq.ef8eed9e-70ff-4623-a712-7ff636822033
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -571,7 +582,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 **URL:** https://sb.flaroapp.pl/rest/v1/comments?select=%2A
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -613,7 +625,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 **URL:** https://sb.flaroapp.pl/rest/v1/comments?id=eq.74c0a8d9-fa29-48f9-b91c-4137f78b2aae
 **Request type**: DELETE
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -626,7 +639,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 **URL:** https://sb.flaroapp.pl/storage/v1/object/post-images/uploads/[unix-time-with-ms]-[count-from-0-to-5]
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -654,7 +668,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/posts
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -691,7 +706,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/auth/v1/token?grant_type=refresh_token
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -763,7 +779,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 ## Get reels endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/reels?select=%2A&order=created_at.desc.nullslast
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -906,7 +923,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 ## Get reels (by their ID) endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/reels?select=%2A&id=eq.94feaeba-a456-4fc1-86f9-c0e3a2d735d8
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -947,7 +965,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 ## View comments on a user reel endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/comments?select=%2A&reel_id=eq.94feaeba-a456-4fc1-86f9-c0e3a2d735d8&order=created_at.asc.nullslast
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -979,7 +998,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 ## View system messages endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/system_messages?select=%2A&or=%28user_id.eq.d677717a-0b96-4071-b637-c589fbb75d4e%2Cuser_id.is.null%29&order=created_at.desc.nullslast
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -1003,7 +1023,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 ## Searching for users endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/users?select=%2A&username=ilike.%25churro%25
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -1036,7 +1057,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/users?user_id=eq.d677717a-0b96-4071-b637-c589fbb75d4e
 **Request type**: PATCH
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -1057,7 +1079,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/posts?id=eq.cb61e4ba-6050-45de-8c73-c9f866567bc0
 **Request type**: DELETE
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -1070,7 +1093,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/reports
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -1092,7 +1116,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/problems
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -1112,7 +1137,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/support
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -1132,7 +1158,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/auth/v1/user
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -1201,7 +1228,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/storage/v1/object/reel-videos/uploads/[unix-time-with-ms]
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -1228,7 +1256,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/reels
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
   - `authorization` : `Bearer   
 <user_access_token>`
 
@@ -1261,3 +1290,135 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 }
 ```
 **Response (201)**: No response.
+
+
+## WebSocket (live messages) endpoint
+
+**Note:** This isn't fully documented as i haven't documented a response when a new post/reel is detected, mark in in the SDK as experimental and offer a build flag (put websocket implemenation to a seperate file) to disable it
+**URL:** wss://sb.flaroapp.pl/realtime/v1/websocket?apikey=<insert-obtained-api-key-from-app>
+&vsn=1.0.0
+**HTTP header parameters:** 
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
+**URL prefix parameters:** 
+- `apikey`: `<insert-obtained-api-key-from-app>
+`
+- vsn: refers to the app version aka `1.0.0`
+
+**Messages**: 
+To initialize a connection:
+```json
+{
+   "topic":"realtime:public:posts:135",
+   "event":"phx_join",
+   "payload":{
+      "config":{
+         "broadcast":{
+            "ack":false,
+            "self":false
+         },
+         "presence":{
+            "key":""
+         },
+         "postgres_changes":[
+            {
+               "event":"*",
+               "schema":"public",
+               "table":"posts", // if it's tracking reels then put reels instead
+               "filter":"creator_id=eq.<user-id>"
+            }
+         ],
+         "private":false
+      },
+      "access_token":"<user-access-token>"
+   },
+   "ref":"4", // number is incremeted by one per request
+   "join_ref":"4" // number is incremeted by one per request
+}
+```
+When connection has been initialized:
+```json
+{
+   "ref":"1", // number is incremeted by one per request
+   "event":"phx_reply",
+   "payload":{
+      "status":"ok",
+      "response":{
+         "postgres_changes":[
+            {
+               "id":23091052,
+               "event":"*",
+               "filter":"creator_id=eq.<user-id>",
+               "schema":"public",
+               "table":"posts" // if it's tracking reels then it will be reels instead
+            }
+         ]
+      }
+   },
+   "topic":"realtime:public:posts:135"
+}
+```
+
+Heartbeat (make it every around 10 seconds or so):
+```json
+{
+   "topic":"phoenix",
+   "event":"heartbeat",
+   "payload":{},
+   "ref":"5" // number is incremeted by one per request
+}
+```
+
+Response to heartbeat:
+
+```json
+{
+   "ref":"5", // number is incremeted by one per request
+   "event":"phx_reply",
+   "payload":{
+      "status":"ok",
+      "response":{}
+   },
+   "topic":"phoenix"
+}
+```
+
+Response to heartbeat if token is expired:
+```json
+{
+   "ref":"4", // number is incremeted by one per request
+   "event":"phx_reply",
+   "payload":{
+      "status":"error",
+      "response":{
+         "reason":"Token has expired 129 seconds ago"
+      }
+   },
+   "topic":"realtime:public:posts:135"
+}
+```
+
+Response if something went wrong (example error message)
+```json
+{
+   "ref":null,
+   "event":"system",
+   "payload":{
+      "message":"{:error, \"Unable to subscribe to changes with given parameters. Please check Realtime is enabled for the given connect parameters: [event: *, filter: creator_id=eq.<user-id>, schema: public, table: posts]\"}",
+      "status":"error",
+      "extension":"postgres_changes",
+      "channel":"public:posts:135"
+   },
+   "topic":"realtime:public:posts:135"
+}
+```
+
+Response to presence state (?)
+```json
+{
+   "ref":null,
+   "event":"presence_state",
+   "payload":{},
+   "topic":"realtime:public:posts:135"
+}
+```

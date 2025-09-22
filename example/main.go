@@ -1,9 +1,12 @@
 package main
 
 import (
+	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/matu6968/flaro-client-go-sdk"
 )
@@ -149,57 +152,57 @@ func main() {
 		}
 
 		// Example: Post a comment
-		fmt.Println("\n=== Post Comment Example ===")
-		newComment, err := client.PostComment(authResp.AccessToken, posts[0].ID, authResp.User.ID, "Great post!", nil)
-		if err != nil {
-			log.Printf("Post comment failed: %v", err)
-		} else {
-			fmt.Printf("Posted comment: %s\n", newComment.Content)
-			fmt.Printf("Comment ID: %s\n", newComment.ID)
-		}
+		// fmt.Println("\n=== Post Comment Example ===")
+		// newComment, err := client.PostComment(authResp.AccessToken, posts[0].ID, authResp.User.ID, "Great post!", nil)
+		// if err != nil {
+		// 	log.Printf("Post comment failed: %v", err)
+		// } else {
+		// 	fmt.Printf("Posted comment: %s\n", newComment.Content)
+		// 	fmt.Printf("Comment ID: %s\n", newComment.ID)
+		// }
 
 		// Example: Like/Unlike a post
-		fmt.Println("\n=== Like Post Example ===")
-		err = client.LikePost(authResp.AccessToken, posts[0].ID, authResp.User.ID, true)
-		if err != nil {
-			log.Printf("Like post failed: %v", err)
-		} else {
-			fmt.Printf("Successfully liked post %s\n", posts[0].ID)
-		}
+		// fmt.Println("\n=== Like Post Example ===")
+		// err = client.LikePost(authResp.AccessToken, posts[0].ID, authResp.User.ID, true)
+		// if err != nil {
+		// 	log.Printf("Like post failed: %v", err)
+		// } else {
+		// 	fmt.Printf("Successfully liked post %s\n", posts[0].ID)
+		// }
 
 		// Example: Delete a comment (if we posted one and got a valid ID)
-		if newComment != nil && newComment.ID != "" {
-			fmt.Println("\n=== Delete Comment Example ===")
-			err = client.DeleteComment(authResp.AccessToken, newComment.ID)
-			if err != nil {
-				log.Printf("Delete comment failed: %v", err)
-			} else {
-				fmt.Printf("Successfully deleted comment %s\n", newComment.ID)
-			}
-		} else {
-			fmt.Println("\n=== Delete Comment Example ===")
-			fmt.Println("Skipping delete comment example - no valid comment ID received from API")
+		// if newComment != nil && newComment.ID != "" {
+		// 	fmt.Println("\n=== Delete Comment Example ===")
+		// 	err = client.DeleteComment(authResp.AccessToken, newComment.ID)
+		// 	if err != nil {
+		// 		log.Printf("Delete comment failed: %v", err)
+		// 	} else {
+		// 		fmt.Printf("Successfully deleted comment %s\n", newComment.ID)
+		// 	}
+		// } else {
+		// 	fmt.Println("\n=== Delete Comment Example ===")
+		// 	fmt.Println("Skipping delete comment example - no valid comment ID received from API")
 
-			// Try to delete an existing comment if there are any
-			if len(comments) > 0 {
-				fmt.Println("Attempting to delete an existing comment for demonstration...")
-				err = client.DeleteComment(authResp.AccessToken, comments[0].ID)
-				if err != nil {
-					log.Printf("Delete existing comment failed: %v", err)
-				} else {
-					fmt.Printf("Successfully deleted existing comment %s\n", comments[0].ID)
-				}
-			}
-		}
+		// 	// Try to delete an existing comment if there are any
+		// 	if len(comments) > 0 {
+		// 		fmt.Println("Attempting to delete an existing comment for demonstration...")
+		// 		err = client.DeleteComment(authResp.AccessToken, comments[0].ID)
+		// 		if err != nil {
+		// 			log.Printf("Delete existing comment failed: %v", err)
+		// 		} else {
+		// 			fmt.Printf("Successfully deleted existing comment %s\n", comments[0].ID)
+		// 		}
+		// 	}
+		// }
 
 		// Example: Create a new post
-		fmt.Println("\n=== Create Post Example ===")
-		err = client.CreatePost(authResp.AccessToken, authResp.User.ID, "Hello from Go SDK!", []string{})
-		if err != nil {
-			log.Printf("Create post failed: %v", err)
-		} else {
-			fmt.Printf("Successfully created new post!\n")
-		}
+		//fmt.Println("\n=== Create Post Example ===")
+		//err = client.CreatePost(authResp.AccessToken, authResp.User.ID, "Hello from Go SDK!", []string{})
+		//if err != nil {
+		//	log.Printf("Create post failed: %v", err)
+		//} else {
+		//fmt.Printf("Successfully created new post!\n")
+		//}
 
 		// Example: Refresh token
 		fmt.Println("\n=== Refresh Token Example ===")
@@ -270,14 +273,14 @@ func main() {
 		}
 
 		// Example: Update user details
-		fmt.Println("\n=== Update User Details Example ===")
-		newBio := "Updated bio from Go SDK!"
-		err = client.UpdateUserDetails(authResp.AccessToken, authResp.User.ID, &newBio, nil, nil)
-		if err != nil {
-			log.Printf("Update user bio failed: %v", err)
-		} else {
-			fmt.Println("Successfully updated user bio!")
-		}
+		//fmt.Println("\n=== Update User Details Example ===")
+		//newBio := "Updated bio from Go SDK!"
+		//err = client.UpdateUserDetails(authResp.AccessToken, authResp.User.ID, &newBio, nil, nil)
+		//if err != nil {
+		//	log.Printf("Update user bio failed: %v", err)
+		//} else {
+		//fmt.Println("Successfully updated user bio!")
+		//}
 
 		// Example: Update username (commented out to avoid changing username)
 		// newUsername := "newusername"
@@ -298,42 +301,42 @@ func main() {
 		// }
 
 		// Example: Delete a post (if we have posts)
-		if len(posts) > 0 {
-			fmt.Println("\n=== Delete Post Example ===")
-			err = client.DeletePost(authResp.AccessToken, posts[0].ID)
-			if err != nil {
-				log.Printf("Delete post failed: %v", err)
-			} else {
-				fmt.Printf("Successfully deleted post %s\n", posts[0].ID)
-			}
-		}
+		//if len(posts) > 0 {
+		//	fmt.Println("\n=== Delete Post Example ===")
+		//err = client.DeletePost(authResp.AccessToken, posts[0].ID)
+		//if err != nil {
+		//	log.Printf("Delete post failed: %v", err)
+		//} else {
+		//	fmt.Printf("Successfully deleted post %s\n", posts[0].ID)
+		//}
+		//}
 
 		// Example: Report a user
-		fmt.Println("\n=== Report User Example ===")
-		err = client.ReportUser(authResp.AccessToken, authResp.User.ID, authResp.User.ID, nil, nil, "Unknown")
-		if err != nil {
-			log.Printf("Report user failed: %v", err)
-		} else {
-			fmt.Println("Successfully reported user!")
-		}
+		//fmt.Println("\n=== Report User Example ===")
+		//err = client.ReportUser(authResp.AccessToken, authResp.User.ID, authResp.User.ID, nil, nil, "Unknown")
+		//if err != nil {
+		//	log.Printf("Report user failed: %v", err)
+		//} else {
+		//	fmt.Println("Successfully reported user!")
+		//}
 
 		// Example: Report a problem
-		fmt.Println("\n=== Report Problem Example ===")
-		err = client.ReportProblem(authResp.AccessToken, authResp.User.ID, "Test Problem", "This is a test problem report from Go SDK")
-		if err != nil {
-			log.Printf("Report problem failed: %v", err)
-		} else {
-			fmt.Println("Successfully reported problem!")
-		}
+		//fmt.Println("\n=== Report Problem Example ===")
+		//err = client.ReportProblem(authResp.AccessToken, authResp.User.ID, "Test Problem", "This is a test problem report from Go SDK")
+		//if err != nil {
+		//	log.Printf("Report problem failed: %v", err)
+		//} else {
+		//	fmt.Println("Successfully reported problem!")
+		//}
 
 		// Example: Contact support
-		fmt.Println("\n=== Contact Support Example ===")
-		err = client.ContactSupport(authResp.AccessToken, authResp.User.ID, "Test Support Request", "This is a test support request from Go SDK")
-		if err != nil {
-			log.Printf("Contact support failed: %v", err)
-		} else {
-			fmt.Println("Successfully contacted support!")
-		}
+		//fmt.Println("\n=== Contact Support Example ===")
+		//err = client.ContactSupport(authResp.AccessToken, authResp.User.ID, "Test Support Request", "This is a test support request from Go SDK")
+		//if err != nil {
+		//	log.Printf("Contact support failed: %v", err)
+		//} else {
+		//	fmt.Println("Successfully contacted support!")
+		//}
 
 		// Example: Change password (commented out to avoid changing password)
 		// fmt.Println("\n=== Change Password Example ===")
@@ -363,5 +366,31 @@ func main() {
 		//         fmt.Println("Successfully created reel!")
 		//     }
 		// }
+
+		// Realtime (experimental) example - build with `-tags realtime`
+		{
+			fmt.Println("\n=== Realtime Example (experimental) ===")
+			rtc := flaro.NewRealtimeClient(os.Getenv("FLARO_API_KEY"))
+			ctx, cancel := context.WithCancel(context.Background())
+			defer cancel()
+			if err := rtc.Connect(ctx); err != nil {
+				log.Printf("Realtime connect failed: %v", err)
+			} else {
+				_ = rtc.StartHeartbeat(ctx, 10*time.Second)
+				if err := rtc.SubscribePostsForCreator(authResp.AccessToken, authResp.User.ID); err != nil {
+					log.Printf("Realtime subscribe failed: %v", err)
+				} else {
+					// Read one typed frame and print it
+					env, err := rtc.ReadMessage()
+					if err != nil {
+						log.Printf("Realtime read failed: %v", err)
+					} else {
+						b, _ := json.MarshalIndent(env, "", "  ")
+						fmt.Println(string(b))
+					}
+				}
+				_ = rtc.Close()
+			}
+		}
 	}
 }

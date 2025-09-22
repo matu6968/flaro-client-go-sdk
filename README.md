@@ -16,6 +16,10 @@ A Go SDK for interacting with the Flaro social media app API.
 - Type-safe API responses
 - Comprehensive error handling
 
+## Planned features
+
+- [x] WebSocket support (experimental, behind build tag `realtime`)
+
 ## Installation
 
 ```bash
@@ -398,6 +402,75 @@ Uploads a video for use in reels.
 
 #### `CreateReel(accessToken, userID, content, videoURL string) error`
 Creates a new reel with the provided video URL.
+
+### Realtime (Experimental)
+
+This feature is experimental and disabled by default. Build with the `realtime` tag to enable it:
+
+```bash
+go build -tags realtime ./...
+```
+
+#### `NewRealtimeClient(apiKey string) *RealtimeClient`
+Creates a realtime websocket client.
+
+#### `(*RealtimeClient) Connect(ctx context.Context) error`
+Connects to the realtime websocket endpoint.
+
+#### `(*RealtimeClient) SubscribePostsForCreator(accessToken, creatorID string) error`
+Subscribes to realtime events for a creator's posts.
+
+#### `(*RealtimeClient) StartHeartbeat(ctx context.Context, interval time.Duration) error`
+Sends phoenix heartbeats periodically (e.g., every 10s).
+
+#### `(*RealtimeClient) ReadMessage() (*RealtimeEnvelope, error)`
+Reads and decodes a single frame into a typed envelope.
+
+#### `RealtimeEnvelope`
+```go
+type RealtimeEnvelope struct {
+    Ref    *string         `json:"ref"`
+    Event  string          `json:"event"`
+    Payload json.RawMessage `json:"payload"`
+    Topic  string          `json:"topic"`
+}
+```
+
+#### `PhxReplyPayload`
+```go
+type PhxReplyPayload struct {
+    Status   string          `json:"status"`
+    Response json.RawMessage `json:"response"`
+}
+```
+
+#### `SystemPayload`
+```go
+type SystemPayload struct {
+    Message   string `json:"message"`
+    Status    string `json:"status"`
+    Extension string `json:"extension"`
+    Channel   string `json:"channel"`
+}
+```
+
+Usage example:
+```go
+env, err := rtc.ReadMessage()
+if err != nil { /* handle */ }
+switch env.Event {
+case "phx_reply":
+    var pr PhxReplyPayload
+    _ = env.UnmarshalPayload(&pr)
+    // inspect pr.Status/pr.Response
+case "system":
+    var sp SystemPayload
+    _ = env.UnmarshalPayload(&sp)
+    // inspect sp.Message
+}
+```
+
+If built without the tag, all methods return an error stating realtime is disabled.
 
 ## Response Types
 
