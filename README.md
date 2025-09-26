@@ -210,6 +210,54 @@ for _, follow := range following {
 }
 ```
 
+#### System Messages (Latest)
+
+```go
+// Fetch the latest system messages (e.g., limit 1)
+latest, err := client.GetLatestSystemMessages(accessToken, 1)
+if err != nil {
+    log.Fatal(err)
+}
+
+if len(latest) > 0 {
+    msg := latest[0]
+    fmt.Printf("System: %s\n", msg.Title)
+}
+```
+
+#### Mark System Message as Read
+
+```go
+// Assume you fetched a message and have its current read_by list
+msgID := 1
+currentReadBy := latest[0].ReadBy
+if err := client.MarkSystemMessageAsRead(accessToken, msgID, currentReadBy, userID); err != nil {
+    log.Fatal(err)
+}
+```
+
+#### Global Chat (Read)
+
+```go
+// Read messages from the Global Channel
+messages, err := client.GetGlobalMessages(accessToken)
+if err != nil {
+    log.Fatal(err)
+}
+for _, m := range messages {
+    fmt.Printf("[%s] %s\n", m.SenderID, m.Content)
+}
+```
+
+#### Global Chat (Send)
+
+```go
+// Send a new message to the Global Channel
+if err := client.SendGlobalMessage(accessToken, userID, "hej"); err != nil {
+    log.Fatal(err)
+}
+```
+
 #### Like/Unlike Posts
 
 ```go
@@ -382,6 +430,18 @@ Retrieves comments for a specific reel.
 
 #### `GetSystemMessages(accessToken, userID string) ([]SystemMessage, error)`
 Retrieves system messages for a user (includes both user-specific and global messages).
+
+#### `GetLatestSystemMessages(accessToken string, limit int) ([]SystemMessageDetail, error)`
+Retrieves latest system messages including title, image and read_by, ordered by newest first. Optional limit.
+
+#### `MarkSystemMessageAsRead(accessToken string, systemMessageID int, currentReadBy []string, userID string) error`
+Appends the caller's user ID to the system message read_by array (idempotent if already present). Returns 204 on success.
+
+#### `GetGlobalMessages(accessToken string) ([]GlobalMessage, error)`
+Reads messages from the Global Channel, ordered by creation time.
+
+#### `SendGlobalMessage(accessToken, senderID, content string) error`
+Sends a message to the Global Channel. Returns 201 on success.
 
 #### `SearchUsers(accessToken, username string) ([]SearchUser, error)`
 Searches for users by username using partial matching.

@@ -272,6 +272,27 @@ func main() {
 			}
 		}
 
+		// Example: Get latest detailed system messages
+		fmt.Println("\n=== Get Latest System Messages (detailed) Example ===")
+		latest, err := client.GetLatestSystemMessages(authResp.AccessToken, 1)
+		if err != nil {
+			log.Printf("Get latest system messages failed: %v", err)
+		} else if len(latest) > 0 {
+			fmt.Printf("Title: %s\n", latest[0].Title)
+			fmt.Printf("Image: %s\n", latest[0].Image)
+			fmt.Printf("ReadBy count: %d\n", len(latest[0].ReadBy))
+		}
+
+		// Example: Mark system message as read (append our user ID)
+		if len(latest) > 0 {
+			fmt.Println("\n=== Mark System Message As Read Example ===")
+			if err := client.MarkSystemMessageAsRead(authResp.AccessToken, latest[0].ID, latest[0].ReadBy, authResp.User.ID); err != nil {
+				log.Printf("Mark system message as read failed: %v", err)
+			} else {
+				fmt.Println("Marked latest system message as read (idempotent)")
+			}
+		}
+
 		// Example: Search users
 		fmt.Println("\n=== Search Users Example ===")
 		searchResults, err := client.SearchUsers(authResp.AccessToken, "churro")
@@ -385,6 +406,23 @@ func main() {
 		//     } else {
 		//         fmt.Println("Successfully created reel!")
 		//     }
+		// }
+
+		// Example: Global chat - read messages
+		fmt.Println("\n=== Global Chat (Read) Example ===")
+		msgs, err := client.GetGlobalMessages(authResp.AccessToken)
+		if err != nil {
+			log.Printf("Get global messages failed: %v", err)
+		} else if len(msgs) > 0 {
+			fmt.Printf("Last global message: [%s] %s\n", msgs[len(msgs)-1].SenderID, msgs[len(msgs)-1].Content)
+		}
+
+		// Example: Global chat - send message (commented out to avoid spam)
+		// fmt.Println("\n=== Global Chat (Send) Example ===")
+		// if err := client.SendGlobalMessage(authResp.AccessToken, authResp.User.ID, "hej from Go SDK"); err != nil {
+		// 	log.Printf("Send global message failed: %v", err)
+		// } else {
+		// 	fmt.Println("Sent message to Global Channel")
 		// }
 
 		// Realtime (experimental) example - build with `-tags realtime`

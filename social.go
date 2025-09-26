@@ -670,25 +670,13 @@ func (c *Client) GetReelComments(accessToken, reelID string) ([]Comment, error) 
 }
 
 // GetSystemMessages retrieves system messages for a user
-func (c *Client) GetSystemMessages(accessToken, userID string) ([]SystemMessage, error) {
-	params := SystemMessagesQueryParams{
-		Select: "*",
-		UserID: userID,
-		Order:  "created_at.desc.nullslast",
-	}
+func (c *Client) GetSystemMessages(accessToken, _ string) ([]SystemMessage, error) {
+	// Updated schema: no user_id column on system_messages. Fetch all, newest first.
+	query := url.Values{}
+	query.Add("select", "*")
+	query.Add("order", "created_at.desc.nullslast")
 
-	queryParams := url.Values{}
-	if params.Select != "" {
-		queryParams.Add("select", params.Select)
-	}
-	// Build the OR query: (user_id.eq.userID,user_id.is.null)
-	orQuery := fmt.Sprintf("(user_id.eq.%s,user_id.is.null)", params.UserID)
-	queryParams.Add("or", orQuery)
-	if params.Order != "" {
-		queryParams.Add("order", params.Order)
-	}
-
-	endpoint := "/rest/v1/system_messages?" + queryParams.Encode()
+	endpoint := "/rest/v1/system_messages?" + query.Encode()
 	resp, err := c.makeAuthenticatedRequest("GET", endpoint, nil, accessToken)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get system messages: %w", err)
@@ -700,7 +688,6 @@ func (c *Client) GetSystemMessages(accessToken, userID string) ([]SystemMessage,
 		return nil, fmt.Errorf("failed to read response body: %w", err)
 	}
 
-	// Check for errors
 	if resp.StatusCode != 200 {
 		var apiErr APIError
 		if err := json.Unmarshal(body, &apiErr); err != nil {
@@ -709,9 +696,63 @@ func (c *Client) GetSystemMessages(accessToken, userID string) ([]SystemMessage,
 		return nil, fmt.Errorf("get system messages failed: %s", apiErr.Message)
 	}
 
-	var messages []SystemMessage
-	if err := json.Unmarshal(body, &messages); err != nil {
+	// Unmarshal into detailed form then map to legacy SystemMessage type
+	var detailed []SystemMessageDetail
+	if err := json.Unmarshal(body, &detailed); err != nil {
 		return nil, fmt.Errorf("failed to parse system messages response: %w", err)
+	}
+
+	out := make([]SystemMessage, 0, len(detailed))
+	for _, d := range detailed {
+		// created_at example: 2025-09-25T17:33:37+00:00
+		t, err := time.Parse(time.RFC3339, d.CreatedAt)
+		if err != nil {
+			// try layout with explicit colon offset already covered by RFC3339; if it fails, ignore parse
+			t = time.Time{}
+		}
+		out = append(out, SystemMessage{
+			ID:        strconv.Itoa(d.ID),
+			UserID:    nil,
+			Content:   d.Content,
+			CreatedAt: t,
+		})
+	}
+	return out, nil
+}
+
+// GetLatestSystemMessages fetches latest system messages with optional limit
+func (c *Client) GetLatestSystemMessages(accessToken string, limit int) ([]SystemMessageDetail, error) {
+	query := url.Values{}
+	query.Add("select", "*")
+	query.Add("order", "created_at.desc.nullslast")
+	if limit > 0 {
+		query.Add("limit", strconv.Itoa(limit))
+	}
+
+	endpoint := "/rest/v1/system_messages?" + query.Encode()
+	resp, err := c.makeAuthenticatedRequest("GET", endpoint, nil, accessToken)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get latest system messages: %w", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	if resp.StatusCode != 200 {
+		var apiErr APIError
+		if err := json.Unmarshal(body, &apiErr); err != nil {
+			return nil, fmt.Errorf("get latest system messages failed with status %d: %s", resp.StatusCode, string(body))
+		}
+		return nil, fmt.Errorf("get latest system messages failed: %s", apiErr.Message)
+	}
+
+	// API returns an array
+	var messages []SystemMessageDetail
+	if err := json.Unmarshal(body, &messages); err != nil {
+		return nil, fmt.Errorf("failed to parse latest system messages response: %w", err)
 	}
 
 	return messages, nil
@@ -884,6 +925,44 @@ func (c *Client) ReportUser(accessToken, userID, reportedBy string, postID, reel
 	}
 
 	// The API returns no response body for successful report creation (201 status)
+	return nil
+}
+
+// MarkSystemMessageAsRead appends the caller userID to read_by for a system message
+func (c *Client) MarkSystemMessageAsRead(accessToken string, systemMessageID int, currentReadBy []string, userID string) error {
+	// ensure userID is included exactly once
+	exists := false
+	for _, id := range currentReadBy {
+		if id == userID {
+			exists = true
+			break
+		}
+	}
+	updated := currentReadBy
+	if !exists {
+		updated = append(updated, userID)
+	}
+
+	req := MarkSystemMessageReadRequest{ReadBy: updated}
+	endpoint := "/rest/v1/system_messages?id=eq." + strconv.Itoa(systemMessageID)
+	resp, err := c.makeAuthenticatedRequest("PATCH", endpoint, req, accessToken)
+	if err != nil {
+		return fmt.Errorf("failed to mark system message as read: %w", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	if resp.StatusCode != 204 {
+		var apiErr APIError
+		if err := json.Unmarshal(body, &apiErr); err != nil {
+			return fmt.Errorf("mark system message as read failed with status %d: %s", resp.StatusCode, string(body))
+		}
+		return fmt.Errorf("mark system message as read failed: %s", apiErr.Message)
+	}
 	return nil
 }
 
@@ -1114,4 +1193,68 @@ func (c *Client) CreateReel(accessToken, userID, content, videoURL string) error
 
 	// The API returns no response body for successful reel creation (201 status)
 	return nil
+}
+
+// SendGlobalMessage sends a message to the Global Channel
+func (c *Client) SendGlobalMessage(accessToken, senderID, content string) error {
+	req := SendGlobalMessageRequest{
+		Content:   content,
+		SenderID:  senderID,
+		CreatedAt: time.Now().Format("2006-01-02T15:04:05.000000"),
+	}
+
+	endpoint := "/rest/v1/messages"
+	resp, err := c.makeAuthenticatedRequest("POST", endpoint, req, accessToken)
+	if err != nil {
+		return fmt.Errorf("failed to send global message: %w", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	if resp.StatusCode != 201 {
+		var apiErr APIError
+		if err := json.Unmarshal(body, &apiErr); err != nil {
+			return fmt.Errorf("send global message failed with status %d: %s", resp.StatusCode, string(body))
+		}
+		return fmt.Errorf("send global message failed: %s", apiErr.Message)
+	}
+	return nil
+}
+
+// GetGlobalMessages retrieves messages from the Global Channel
+func (c *Client) GetGlobalMessages(accessToken string) ([]GlobalMessage, error) {
+	query := url.Values{}
+	query.Add("select", "*")
+	query.Add("order", "created_at.asc.nullslast")
+	endpoint := "/rest/v1/messages?" + query.Encode()
+
+	resp, err := c.makeAuthenticatedRequest("GET", endpoint, nil, accessToken)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get global messages: %w", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	if resp.StatusCode != 200 {
+		var apiErr APIError
+		if err := json.Unmarshal(body, &apiErr); err != nil {
+			return nil, fmt.Errorf("get global messages failed with status %d: %s", resp.StatusCode, string(body))
+		}
+		return nil, fmt.Errorf("get global messages failed: %s", apiErr.Message)
+	}
+
+	var messages []GlobalMessage
+	if err := json.Unmarshal(body, &messages); err != nil {
+		return nil, fmt.Errorf("failed to parse global messages response: %w", err)
+	}
+
+	return messages, nil
 }

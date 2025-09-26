@@ -242,6 +242,16 @@ type SystemMessage struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
+// SystemMessageDetail represents a detailed system message (title, image, read_by)
+type SystemMessageDetail struct {
+	ID        int      `json:"id"`
+	CreatedAt string   `json:"created_at"`
+	Title     string   `json:"title"`
+	Content   string   `json:"content"`
+	ReadBy    []string `json:"read_by"`
+	Image     string   `json:"image"`
+}
+
 // SearchUser represents a user found in search results
 type SearchUser struct {
 	Username          string      `json:"username"`
@@ -322,6 +332,11 @@ type SupportRequest struct {
 	CreatedAt string `json:"created_at"` // Current time in ISO 8601 format
 }
 
+// MarkSystemMessageReadRequest represents the request to mark a system message as read
+type MarkSystemMessageReadRequest struct {
+	ReadBy []string `json:"read_by"`
+}
+
 // ChangePasswordRequest represents the request body for changing password
 type ChangePasswordRequest struct {
 	Password string `json:"password"` // New password
@@ -366,6 +381,21 @@ type CreateReelRequest struct {
 	Mentions  []string `json:"mentions"`   // Mentions (typically empty)
 	Comments  []string `json:"comments"`   // Comments (typically empty)
 	Likes     []string `json:"likes"`      // Likes (typically empty)
+}
+
+// GlobalMessage represents a message in the Global Channel
+type GlobalMessage struct {
+	ID        int    `json:"id"`
+	SenderID  string `json:"sender_id"`
+	Content   string `json:"content"`
+	CreatedAt string `json:"created_at"`
+}
+
+// SendGlobalMessageRequest represents the request body to send a global message
+type SendGlobalMessageRequest struct {
+	Content   string `json:"content"`
+	SenderID  string `json:"sender_id"`
+	CreatedAt string `json:"created_at"`
 }
 
 // APIError represents an API error response

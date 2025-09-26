@@ -4,10 +4,9 @@ These API docs allow you to create a client SDK in another language, Go is shown
 
 ## Sign up endpoint
 **URL:** https://sb.flaroapp.pl/auth/v1/signup
-
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` (optional) : `Bearer <insert-obtained-api-key-from-app>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` (optional) : `Bearer insert-obtained-api-key-from-app>`
 
 **Body**:
 ```json
@@ -78,16 +77,12 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ```
 
 **Before proceeding further with this newly made account via the provided steps, do the following:**
-
 ## prerequisite step after making the account from the Sign up endpoint after signing in
-
 **URL:** https://sb.flaroapp.pl/rest/v1/users
-
 **HTTP request type:** POST
-
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization`: `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **Body**:
 ```json
@@ -113,8 +108,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## Sign in endpoint
 **URL:** https://sb.flaroapp.pl/auth/v1/token?grant_type=password
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` (optional) : `Bearer <insert-obtained-api-key-from-app>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` (optional) : `Bearer insert-obtained-api-key-from-app>`
 
 **Body**:
 ```json
@@ -184,8 +179,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## View posts endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/posts?select=%2A&order=created_at.desc.nullslast&offset=0&limit=20
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (by default all posts are selected  (*))
@@ -301,8 +296,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## View following endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/follows?select=following_id%2Cusers%21follows_following_id_fkey%28%2A%29&follower_id=eq.d677717a-0b96-4071-b637-c589fbb75d4e
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (specified to view all followers based on a a followers user , aka `following_id,users!follows_following_id_fkey(*)`)
@@ -335,8 +330,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## View user endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/users?select=%2A&user_id=eq.d677717a-0b96-4071-b637-c589fbb75d4e
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (specified to view all followers aka *)
@@ -363,8 +358,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## View posts (from specified user) endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/posts?select=%2A&creator_id=eq.2e2bfc78-cba4-433e-ab0f-a12e7cdcf16c
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (specified to view all posts aka *)
@@ -487,8 +482,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 **URL:** https://sb.flaroapp.pl/rest/v1/posts?id=eq.ef8eed9e-70ff-4623-a712-7ff636822033
 **Request type:** PATCH
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - id: `eq.` followed by the post ID like `eq.ef8eed9e-70ff-4623-a712-7ff636822033
@@ -509,8 +504,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## View comments on a user post endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/comments?select=%2A&post_id=eq.33404c58-45ef-4657-9c27-707b926cad41&order=created_at.asc.nullslast
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (specified to view all comments aka *)
@@ -568,8 +563,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 ## Get comment count (also known as just ID's) on a user post endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/comments?select=id&post_id=eq.ef8eed9e-70ff-4623-a712-7ff636822033
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (specified to view comment ID's aka `id`) 
@@ -596,8 +591,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 **URL:** https://sb.flaroapp.pl/rest/v1/comments?select=%2A
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (specified to view all comments aka *) 
@@ -637,8 +632,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 **URL:** https://sb.flaroapp.pl/rest/v1/comments?id=eq.74c0a8d9-fa29-48f9-b91c-4137f78b2aae
 **Request type**: DELETE
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - id:  `eq.` followed by the comment ID like `eq.74c0a8d9-fa29-48f9-b91c-4137f78b2aae`
@@ -649,8 +644,8 @@ These API docs allow you to create a client SDK in another language, Go is shown
 **URL:** https://sb.flaroapp.pl/storage/v1/object/post-images/uploads/[unix-time-with-ms]-[count-from-0-to-5]
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL parameters:**
 - unix-time-with-ms: current system time in the Unix epoch with prefixed milliseconds (like 1758469632000)
@@ -676,8 +671,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/posts
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **Body**: 
 ```json
@@ -712,8 +707,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/auth/v1/token?grant_type=refresh_token
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - grant_type: type of operation to do on the token (in this case to renew the expiry date, aka `refresh_token`) 
@@ -783,8 +778,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 ## Get reels endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/reels?select=%2A&order=created_at.desc.nullslast
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (specified to view all reels aka *) 
@@ -873,20 +868,14 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
       "content":"fr",
       "video":"https://sb.flaroapp.pl/storage/v1/object/public/reel-videos/uploads/1758317825528",
       "created_at":"2025-09-19T23:37:05.932564+00:00",
-      "tags":[
-         
-      ],
+      "tags":[],
       "score":0,
       "boost_ends":null,
       "boost":1,
       "is_private":false,
       "location":null,
-      "mentions":[
-         
-      ],
-      "comments":[
-         
-      ],
+      "mentions":[],
+      "comments":[],
       "likes":[
          "2e2bfc78-cba4-433e-ab0f-a12e7cdcf16c"
       ]
@@ -897,20 +886,14 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
       "content":"twórca: @capesy.sm",
       "video":"https://sb.flaroapp.pl/storage/v1/object/public/reel-videos/uploads/1758314508882",
       "created_at":"2025-09-19T22:41:53.128619+00:00",
-      "tags":[
-         
-      ],
+      "tags":[],
       "score":0,
       "boost_ends":null,
       "boost":1,
       "is_private":false,
       "location":null,
-      "mentions":[
-         
-      ],
-      "comments":[
-         
-      ],
+      "mentions":[],
+      "comments":[],
       "likes":[
          "f6a7ab14-9f4e-4eca-9d61-5691c96a1eda",
          "69fd6e93-4370-42ee-bb59-2ad2cbdf2cf7",
@@ -925,8 +908,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 ## Get reels (by their ID) endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/reels?select=%2A&id=eq.94feaeba-a456-4fc1-86f9-c0e3a2d735d8
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (specified to view all reels aka *) 
@@ -941,20 +924,14 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
       "content":"💩",
       "video":"https://sb.flaroapp.pl/storage/v1/object/public/reel-videos/uploads/1758467573846",
       "created_at":"2025-09-21T18:13:00.733333+00:00",
-      "tags":[
-         
-      ],
+      "tags":[],
       "score":0,
       "boost_ends":null,
       "boost":1,
       "is_private":false,
       "location":null,
-      "mentions":[
-         
-      ],
-      "comments":[
-         
-      ],
+      "mentions":[],
+      "comments":[],
       "likes":[
          "6922e95d-4303-4c31-a28d-49eaf67e6192",
          "81ae751b-b5ae-4fe9-ae69-28bc363c5cc0"
@@ -965,8 +942,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 ## View comments on a user reel endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/comments?select=%2A&reel_id=eq.94feaeba-a456-4fc1-86f9-c0e3a2d735d8&order=created_at.asc.nullslast
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (specified to view all comments aka *)
@@ -994,33 +971,89 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 ```
 
 ## View system messages endpoint
-**URL:** https://sb.flaroapp.pl/rest/v1/system_messages?select=%2A&or=%28user_id.eq.d677717a-0b96-4071-b637-c589fbb75d4e%2Cuser_id.is.null%29&order=created_at.desc.nullslast
+**URL:** https://sb.flaroapp.pl/rest/v1/system_messages?select=%2A&order=created_at.desc.nullslast&limit=1
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (specified to view all system messages aka *)
-- or: `(user_id.eq` followed by the user ID and then `,user_id.is.null)` like `(user_id.eq.94feaeba-a456-4fc1-86f9-c0e3a2d735d8,user_id.is.null)`
 - order: sort by latest system message aka`created_at.asc.nullslast` 
+- limit: set the system message limit amount (like `1`)
 
 **Response (200)**:
 ```json
-[
-   {
-      "id":"1318db11-ed8b-42a0-8e63-d1c449172bea",
-      "user_id":null, // it it's null assume it's a global message
-      "content":"Welcome to Flaro!",
-      "created_at":"2025-09-19T18:00:00+00:00"  // message date in ISO 8601 format
-   }
-]
+{
+   "id":1,
+   "created_at":"2025-09-25T17:33:37+00:00",
+   "title":"New Autumn Theme!\r\nImproved UI \r\nGlobal Chat\r\nAnd much more!\r\n",
+   "content":"Update!",
+   "read_by":[
+      "69fd6e93-4370-42ee-bb59-2ad2cbdf2cf7",
+      "f75eedcf-d743-4762-b1b7-2ef57017af16",
+      "74b809b3-875c-4eb3-81bd-5ba82897589c",
+      "6e12c069-275c-4cd0-b394-dce191330b5e",
+      "85d6bbb2-95f2-416c-aa59-1bb79f57de57",
+      "f6a7ab14-9f4e-4eca-9d61-5691c96a1eda",
+      "b78b6dd0-4cca-49df-8853-0f8b0f829003",
+      "d1246357-ab88-45c3-9b6d-79b3c92171bb",
+      "630c4184-3d34-42eb-83a8-9f179a07ccf4",
+      "d086f7b4-f079-4541-bf6d-1de6f5e744f6",
+      "79d0e59d-0ce2-42c0-8ba6-494a63c99d5f",
+      "5d7ae3ce-7c4d-48a4-872f-22a54901a682",
+      "e2beeaa6-59fa-43d4-902e-66e97fed7bad",
+      "9db2491d-05e7-46a3-94dc-7f33624d00ab",
+      "fe26f580-0021-4a91-a42f-0e99ccaa84e0",
+      "7ff038c0-dd9b-4a87-91da-99e2fdb725a8",
+      "0ab5808f-a272-4d9f-a735-68665a650c6f"
+   ],
+   "image":"https://i.postimg.cc/5ySQfvqz/logo-text-bg.png"
+}
 ```
 
+## Mark system message as read endpoint
+**URL:** https://sb.flaroapp.pl/rest/v1/system_messages?id=eq.1
+**HTTP request type**: PATCH
+**HTTP header parameters:** 
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
+
+**URL prefix parameters:**
+- id: `ed.` followed by the system message ID like `eq.1`
+
+**Body**:
+
+```json
+{
+   "read_by":[
+      "69fd6e93-4370-42ee-bb59-2ad2cbdf2cf7",
+      "f75eedcf-d743-4762-b1b7-2ef57017af16",
+      "74b809b3-875c-4eb3-81bd-5ba82897589c",
+      "6e12c069-275c-4cd0-b394-dce191330b5e",
+      "85d6bbb2-95f2-416c-aa59-1bb79f57de57",
+      "f6a7ab14-9f4e-4eca-9d61-5691c96a1eda",
+      "b78b6dd0-4cca-49df-8853-0f8b0f829003",
+      "d1246357-ab88-45c3-9b6d-79b3c92171bb",
+      "630c4184-3d34-42eb-83a8-9f179a07ccf4",
+      "d086f7b4-f079-4541-bf6d-1de6f5e744f6",
+      "79d0e59d-0ce2-42c0-8ba6-494a63c99d5f",
+      "5d7ae3ce-7c4d-48a4-872f-22a54901a682",
+      "e2beeaa6-59fa-43d4-902e-66e97fed7bad",
+      "9db2491d-05e7-46a3-94dc-7f33624d00ab",
+      "fe26f580-0021-4a91-a42f-0e99ccaa84e0",
+      "7ff038c0-dd9b-4a87-91da-99e2fdb725a8",
+      "0ab5808f-a272-4d9f-a735-68665a650c6f",
+      "d677717a-0b96-4071-b637-c589fbb75d4e" // add your user ID to the body to read_by entity, do not modify other user ID's
+   ]
+}
+```
+
+**Response (204)**: No content.
 ## Searching for users endpoint
 **URL:** https://sb.flaroapp.pl/rest/v1/users?select=%2A&username=ilike.%25churro%25
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - select: (specified to search all users aka *)
@@ -1042,7 +1075,11 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
       "last_seen":"2025-09-19T22:20:58.009967",
       "user_id":"2e2bfc78-cba4-433e-ab0f-a12e7cdcf16c",
       "ranks":null,
-      "premium_expires":null
+      // or if there is a rank:
+      // "ranks": [
+      //   "Beta"
+      //],
+      "premium_expires":null // if the user has Flaro Premium, this would be replaced by a ISO 8601 compatible date like "3009-01-30T05:12:10+00:00"
    }
 ]
 ```
@@ -1051,8 +1088,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/users?user_id=eq.d677717a-0b96-4071-b637-c589fbb75d4e
 **Request type**: PATCH
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - user_id: `eq.` followed by the user ID like `eq.d677717a-0b96-4071-b637-c589fbb75d4e
@@ -1071,8 +1108,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/posts?id=eq.cb61e4ba-6050-45de-8c73-c9f866567bc0
 **Request type**: DELETE
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - id:  `eq.` followed by the post ID like `eq.cb61e4ba-6050-45de-8c73-c9f866567bc0
@@ -1083,8 +1120,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/reports
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **Body**:
 ```json
@@ -1104,8 +1141,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/problems
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **Body**:
 ```json
@@ -1123,8 +1160,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/support
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **Body**:
 ```json
@@ -1142,8 +1179,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/auth/v1/user
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **Body**:
 ```json
@@ -1210,8 +1247,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/storage/v1/object/reel-videos/uploads/[unix-time-with-ms]
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL parameters:**
 - unix-time-with-ms: current system time in the Unix epoch with prefixed milliseconds (like 1758482692793)
@@ -1236,8 +1273,8 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 **URL:** https://sb.flaroapp.pl/rest/v1/reels
 **Request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **Body**: 
 ```json
@@ -1248,9 +1285,7 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
       "`https://sb.flaroapp.pl/storage/v1/object/public/reel-videos/uploads/1758482692793`" // specify uploaded media url's from the above post image endpoint
    ],
    "created_at":"2025-09-21T17:35:22.323266", //  current date in ISO 8601 format
-   "tags":[
-      
-   ],
+   "tags":[],
    "score":0,
    "boost_ends":null,
    "boost":1,
@@ -1274,20 +1309,20 @@ To use this file after in new posts, the URL will be like this: `https://sb.flar
 
 **Note:** This isn't fully documented as i haven't documented a response when a new post/reel is detected, any SDK's that add this feature should mark it as experimental and offer a build flag (put websocket implemenation to a seperate file) to disable it
 
-**URL:** wss://sb.flaroapp.pl/realtime/v1/websocket?apikey=<insert-obtained-api-key-from-app>&vsn=1.0.0
+**URL:** wss://sb.flaroapp.pl/realtime/v1/websocket?apikey=insert-obtained-api-key-from-app>&vsn=1.0.0
 
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `insert-obtained-api-key-from-app>`
 
 **URL prefix parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
+- `apikey`: `insert-obtained-api-key-from-app>`
 - vsn: refers to the app version aka `1.0.0`
 
 **Messages**: 
-To initialize a connection:
+To initialize a connection (posts):
 ```json
 {
-   "topic":"realtime:public:posts:135",
+   "topic":"realtime:public:posts:135", // if it's tracking reels then replace posts with reels instead
    "event":"phx_join",
    "payload":{
       "config":{
@@ -1314,6 +1349,36 @@ To initialize a connection:
    "join_ref":"4" // number is incremeted by one per request
 }
 ```
+
+To initialize a connection (Global Channel):
+```json
+{
+   "topic":"realtime:public:messages:103",
+   "event":"phx_join",
+   "payload":{
+      "config":{
+         "broadcast":{
+            "ack":false,
+            "self":false
+         },
+         "presence":{
+            "key":""
+         },
+         "postgres_changes":[
+            {
+               "event":"*",
+               "schema":"public",
+               "table":"messages"
+            }
+         ],
+         "private":false
+      },
+      "access_token":"<user_access_token>"
+   },
+   "ref":"11", // number is incremeted by one per request
+   "join_ref":"11" // number is incremeted by one per request
+}
+```
 When connection has been initialized:
 ```json
 {
@@ -1324,11 +1389,11 @@ When connection has been initialized:
       "response":{
          "postgres_changes":[
             {
-               "id":23091052,
+               "id":23091052, // id for Global Channel will be 72696871 instead
                "event":"*",
-               "filter":"creator_id=eq.<user-id>",
+               "filter":"creator_id=eq.<user-id>", // won't be present on table messages
                "schema":"public",
-               "table":"posts" // if it's tracking reels then it will be reels instead
+               "table":"posts" // if it's tracking reels then it will be reels or if it's tracking a Global Channel then it will be called messages instead
             }
          ]
       }
@@ -1337,6 +1402,20 @@ When connection has been initialized:
 }
 ```
 
+If subscription to events has succeeded (Global channel):
+```json
+{
+   "ref":null,
+   "event":"system",
+   "payload":{
+      "message":"Subscribed to PostgreSQL",
+      "status":"ok",
+      "extension":"postgres_changes",
+      "channel":"public:messages:103"
+   },
+   "topic":"realtime:public:messages:103"
+}
+```
 Heartbeat (make it every around 10 seconds or so):
 ```json
 {
@@ -1405,8 +1484,8 @@ Response to presence state (?)
 **URL:** https://sb.flaroapp.pl/auth/v1/logout?scope=local
 **HTTP request type**: POST
 **HTTP header parameters:** 
-- `apikey`: `<insert-obtained-api-key-from-app>`
-- `authorization` : `Bearer <user_access_token>`
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
 
 **URL prefix parameters:**
 - scope: likely refers the logout type, if it's set to `local` then only logout from this device, otherwise assume log out from all devices, unsure though
@@ -1414,3 +1493,70 @@ Response to presence state (?)
 **Body**: Can be a empty JSON body like `{}`
 
 **Response (204)**: No content.
+
+## Read messages from Global Channel endpoint
+**URL:** https://sb.flaroapp.pl/rest/v1/messages?select=%2A&order=created_at.asc.nullslast
+**HTTP header parameters:** 
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
+
+**URL prefix parameters:**
+- select: (specified to view all messages aka *)
+- order: sort by latest system message aka`created_at.asc.nullslast` 
+
+**Response (200, showing last 5 messages)**: 
+
+```json
+[
+   {
+      "id":1,
+      "sender_id":"69fd6e93-4370-42ee-bb59-2ad2cbdf2cf7",
+      "content":"siema",
+      "created_at":"2025-09-25T16:02:45.52834+00:00"
+   },
+   {
+      "id":2,
+      "sender_id":"69fd6e93-4370-42ee-bb59-2ad2cbdf2cf7",
+    "content":"siemasiemsdnaklhdsalkdkasgdsadkasgdjkgfjksdgfjhsgjfkgkjgdhjsfghjsdgfjdsgjfdsgfgsdkfgsjkdgfjkdsgfksdgfksdgkfjsdgkfjsgkjfgkjsdgfksdgfksdgfksgfksgkfjsdgkfsgksfgfgdgkgfsfg",
+      "created_at":"2025-09-25T16:17:51.079067+00:00"
+   },
+   {
+      "id":3,
+      "sender_id":"69fd6e93-4370-42ee-bb59-2ad2cbdf2cf7",
+      "content":"grajer",
+      "created_at":"2025-09-25T16:26:56.137879+00:00"
+   },
+   {
+      "id":4,
+      "sender_id":"69fd6e93-4370-42ee-bb59-2ad2cbdf2cf7",
+      "content":"c",
+      "created_at":"2025-09-25T16:26:59.059202+00:00"
+   },
+   {
+      "id":5,
+      "sender_id":"69fd6e93-4370-42ee-bb59-2ad2cbdf2cf7",
+      "content":"c",
+      "created_at":"2025-09-25T16:27:00.228039+00:00"
+   }
+]
+```
+
+## Send messages to Global Channel endpoint
+**URL:** https://sb.flaroapp.pl/rest/v1/messages
+**HTTP request type:** POST
+**HTTP header parameters:** 
+- `apikey`: `insert-obtained-api-key-from-app>`
+  - `authorization` : `Bearer <user_access_token>`
+
+**Body:**
+
+```json
+{
+   "content":"hej", // your message content
+   "sender_id":"d677717a-0b96-4071-b637-c589fbb75d4e", // your user ID
+   "created_at":"2025-09-26T12:34:26.264261" // current timestamp is ISO 8601 format
+}
+```
+
+
+**Response (201)**:  No content.
