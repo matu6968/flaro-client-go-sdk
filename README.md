@@ -1,3 +1,6 @@
+> [!NOTE]
+> Due to the Flaro servers being taken offline as of November 2025, this project has been archived and will no longer be maintained.
+
 # Unofficial Flaro Client Go SDK
 
 A Go SDK for interacting with the Flaro social media app API.
